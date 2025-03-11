@@ -22,7 +22,6 @@ def load_output_data():
     output_data = {}
     for file in csv_files:
         df = pd.read_csv(file)
-        if 'epoch' in df.columns: continue
         output_data[file] = df
 
     return output_data
@@ -92,7 +91,7 @@ if option == "원본 데이터":
     
     # 테스트 데이터 출력
     st.header("테스트 데이터")
-    page = show_dataframe(testd,st,'../data/test/')
+    page = show_dataframe(testd,st,'./data/test/')
 
     # 트레인 데이터 출력
     ## 타겟 별로 출력할지 설정
@@ -100,7 +99,7 @@ if option == "원본 데이터":
     if not targetdata:
         # 전체 출력
         st.header("트레인 데이터")
-        show_dataframe(traind,st,'../data/train/')
+        show_dataframe(traind,st,'./data/train/')
         traintargetcount = traind["label"].value_counts().sort_index()
         # 분포 확인
         st.header("트레인 데이터 타겟 값 분포")
@@ -114,7 +113,7 @@ if option == "원본 데이터":
 
         traind = traind.loc[traind.label == target].reset_index()
         st.header("트레인 데이터")
-        show_dataframe(traind,st,'../data/train/')
+        show_dataframe(traind,st,'./data/train/')
 # output 파일 체크
 elif option == "결과 데이터":
     output_data = load_output_data()
